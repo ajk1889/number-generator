@@ -25,9 +25,9 @@ int main() {
     auto startIter = getParams.find("start");
     auto endIter = getParams.find("end");
     if (startIter != getParams.end())
-        getBegin = std::stoull(static_cast<string>(*startIter));
+        getBegin = std::stoull(static_cast<string>((*startIter)[0]));
     if (endIter != getParams.end())
-        getEnd = std::stoull(static_cast<string>(*endIter));
+        getEnd = std::stoull(static_cast<string>((*endIter)[0]));
 
     if (data["HEADERS"].contains("Range")) {
         string range = data["HEADERS"]["Range"][0];
