@@ -24,6 +24,7 @@ int main() {
     auto getParams = data["GET"];
     auto startIter = getParams.find("start");
     auto endIter = getParams.find("end");
+
     if (startIter != getParams.end())
         getBegin = std::stoull(static_cast<string>((*startIter)[0]));
     if (endIter != getParams.end())
@@ -39,9 +40,12 @@ int main() {
     const auto actualBegin = getBegin + rangeBegin;
     if (!rangeEnd) rangeEnd = getEnd - getBegin - 1;
     Generator generator(actualBegin);
-    map <string, vector<string>> headers;
-    headers["Content-Type"] = {"application/octet-stream"};
-    headers["Content-Disposition"] = {"attachment; filename=\"numbers.txt\""};
+    map<string, vector<string>> headers;
+    auto showIter = getParams.find("show");
+    if (showIter == getParams.end()) {
+        headers["Content-Type"] = {"application/octet-stream"};
+        headers["Content-Disposition"] = {"attachment; filename=\"numbers.txt\""};
+    } else headers["Content-Type"] = {"text/plain"};
     headers["Content-Range"] = {(boost::format("bytes %d-%d/%d") % rangeBegin % rangeEnd % (getEnd - getBegin)).str()};
     json meta{
             {"responseCode", 200},
