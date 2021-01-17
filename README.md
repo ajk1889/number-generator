@@ -1,5 +1,5 @@
 # number-generator
-A sequential arbitary size file generator module for Test-suit server. It generates the following sequence of numbers and returns it to the client as if the client was downloading file.
+An arbitary size file generator module for Test-suit. It generates the following sequence of numbers and returns it to the client as if the client was downloading a file.
 ```
 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ....
 ```
