@@ -1,10 +1,9 @@
 # number-generator
-A sequential number generator module for Test-suit server
-
-Generates the following sequence of numbers as a file and lets the client download it
+A sequential arbitary size file generator module for Test-suit server. It generates the following sequence of numbers and returns it to the client as if the client was downloading file.
 ```
 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ....
 ```
+The module supports `Range` header (partial content) and therefore download can be resumed if it gets interrupted. The default file size is 100MB. File size and byte offset can be tweaked via HTTP GET parameter values.
 
 ### Accepted GET parameter values
 - `start`: The byte position from which the sequence should be started (in bytes). **This is not the number from which sequence starts counting**<br/>
@@ -22,7 +21,7 @@ For example, for the request `/generate?start=20&end=40` the result will be `10 
 `start` value should never be greater than `end` value. The behaviour is not defined in that case.
 
 ### Range header support
-This module perfectly supports Range headers (Single range only).
+This module supports Range headers (Single range only).
 The download can be stopped and resumed without requiring to start from beginning.
 
 ### Data share mode
